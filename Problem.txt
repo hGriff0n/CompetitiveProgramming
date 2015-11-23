@@ -1,0 +1,94 @@
+Graph Coloring Algorithm
+	Map Coloring
+		Given a list of paints and their cost
+		Determine if it's possible to paint the given picture so that no two faces that touch have the same color within budget (profit/loss/even)
+			Name the paintings? (for output tagging)
+
+"Flavor" text
+	People:
+		Francis Guthrie
+		Prof DeMorgan
+		Alfred Kempe
+		Percy John Heawood
+		Kenneth Appel
+		Wolfgang HAken
+		John A. Koch
+
+Time Limit: 1 second
+Memory Limit 1024 GB
+
+Problem
+	A is a painter with an interest in color-by-number pictures. Naturally, as a painter, they have little money with which to pursue their hobby.
+	Recently, however, they have been approached by some investors who share their interests in pushing the bounds of artistic freedom and creativity.
+
+	The investors have offered A a handsome amount for a collection of paintings and A, as a poor, senseless artist, eagerly accepted before considering
+	How much it would cost him to paint. Unfortunately for A, this is the one week of the year where the entire French populace is not on strike and,
+	As a result, the cost of painting supplies has skyrocketed. 
+
+	Luckily, the investors never specified how many colors they wanted A to use for the paintings, only that no adjacent "cells" share the same color.
+	Hardpressed for time, A has asked for your help in figuring out the optimal way to color the paintings so that he saves the most money. Being an artist,
+	Though, A is mainly concerned about the profitability of the whole order, resolving to go out in a "blaze of Dadist glory" if he should lose money, and
+	Is content to merely know whether, on an individual painting, they are making or losing money.
+
+Input
+	The first line contains a single positive integer C (C > 0) indicating the number of different paint colors that A can use.
+	The next C lines contain a string-integer pair specifiying a color and it's current market price.
+	Following the last color line, is any number of cases (> 0), each specifying a specific painting that was ordered by the investors.
+
+	The first line of a case consists of a string P, an integer V (> 0), and an integer N (2 < N < 27).
+	P is the painting's name, with hypen's taking the place of spaces. V is the amount that the investors have 
+
+	The next N lines contain a description of the painting's cells.
+	Each line begins with a single character L representing a unique cell in the painting.
+	The rest of the line describes the set of all cells adjacent to L in the painting.
+
+Output
+	For each painting, print the name of the painting and whether it is a profit, loss, or neither for A.
+	Following the paintings, print the total profit for the order, with a + specifying gains and a - specifying losses.
+
+
+Sample Data
+	Input
+		6
+		YELLOW 123
+		BLUE 201
+		GREEN 320
+		RED 591
+		PURPLE 754
+		BEIGE 1000
+
+		Mona-Lisa 1900 7
+		a b c e f
+		b a d f g
+		c a d e f
+		d b c f g
+		e a c g
+		f a b c d
+		g b d e
+
+		American-Gothic 1500 8
+		a b c
+		b a c d
+		c a b d
+		d b c
+		e f g
+		f e g h
+		g e f h
+		h f g
+
+		The-Scream 1419 9
+		a b c d e
+		b a f
+		c a f
+		d a g h
+		e a h
+		f b c i
+		g d i
+		h d e i
+		i f g h
+
+	Output
+		Mona Lisa: profit
+		American Gothic: loss
+		The Scream: even
+		Profit: -13
