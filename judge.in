@@ -1,0 +1,145 @@
+6
+YELLOW 651
+BLUE   961
+GREEN  329
+RED    318
+PURPLE 543
+BEIGE  684
+
+3
+Minerva 0 12
+a b c
+b a c d e
+c a b e f
+d b g
+e b c f g h
+f c e h i
+g d e h j
+h e f g i k l
+i f h l
+j g k
+k h j l
+l h i k
+
+The-Last-Supper 17451 26
+a b e k
+b a c e f l
+c b d f h
+d c i j p
+e a b l
+f b c g l m n o
+g f h o p
+h c g p
+i d j p q
+j d i q
+k a l t u
+l a b e f k m r t
+m f l n r
+n f m o r w
+o f g n p s w z
+p d g h i o q s
+q i j p s y
+r l m n t v w
+s o p q x y z
+t k l r u v
+u k t v
+v r t u w
+w n o r v x z
+x s w y z
+y q s x
+z o s w x
+
+Da-Vinci 6000 16
+a b e f g j
+b a c e f g
+c b d f g h
+d c f g h k
+e a b f i j
+f a b c d e g i j k m
+g a b c d f h j k l p
+h c d g k l
+i c f j m n
+j a c f g i k m n o p
+k d f g h j l m n o p
+l g h k o p
+m f i j k n
+n i j k m o
+o j k l n p
+p g j k l o
+
+5
+Las-Meninas 1837 5
+a b c
+b a d
+c a e
+d b e
+e c d
+
+The-Kiss 3960 10
+a b f j
+b a d f g
+c d e j
+d b c
+e c g h
+f a b
+g b e i
+h e i
+i g h j
+j a c i
+
+The-Son-of-Man 3172 7
+a b c d e f g
+b a e f
+c a d e g
+d a c e g
+e a b c d g
+f a b
+g a c d e
+
+Guernica 2588 8
+a c g
+b d h
+c a e
+d b f
+e c g
+f d h
+g e a
+h f b
+
+The-Persistence-of-Memory 3100 7
+a b c d e f g
+b a e f
+c a d e g
+d a c e g
+e a b c d g
+f a b
+g a c d e
+
+3
+The-Eyes 2250 6
+a b c
+b a c
+c a b
+d e f
+e d f
+f d e
+
+Taj-Mahal 4000 10
+a b e h j
+b a c d
+c b f
+d b e f
+e a d f g h
+f c d e g
+g e f i
+h a e i
+i g h j
+j a i
+
+James-Bond 2400 6
+a b c d f
+b a c d
+c a b d e
+d a b c e f
+e c d f
+f a d e

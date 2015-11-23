@@ -1,0 +1,38 @@
+6
+YELLOW 123
+BLUE 201
+GREEN 320
+RED 591
+PURPLE 754
+BEIGE 1000
+
+3
+Mona-Lisa 1900 7
+a b c e f
+b a d f g
+c a d e f
+d b c f g
+e a c g
+f a b c d
+g b d e
+
+American-Gothic 1500 8
+a b c
+b a c d
+c a b d
+d b c
+e f g
+f e g h
+g e f h
+h f g
+
+The-Scream 1419 9
+a b c d e
+b a f
+c a f
+d a g h
+e a h
+f b c i
+g d i
+h d e i
+i f g h
