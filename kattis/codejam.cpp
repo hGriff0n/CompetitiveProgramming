@@ -51,7 +51,7 @@ int c_main(int argc, const char* argv[]) {
 		if (out > 9999) throw "";
 		std::printf("Case #%d: %04d\n", i + 1, out);
 
-		//delete[input.size()] tab;
+		//delete[input.size()] tab;	<-- I'm not actually sure about delete[] syntax. Kattis can stand the memory leaks
 	}
 
 	return 0;
