@@ -1,56 +1,57 @@
-#include <sstream>
-#include <iostream>
+#include <unordered_map>
 #include <algorithm>
-#include <iterator>
+#include <iostream>
+#include <iterator>				// Needed for std::back_iterator
+#include <sstream>
 #include <vector>
 #include <set>
-#include <map>
 
+// Read the initial data describing the cost of supplies
+template <typename T>
+auto readExpenses() {
+	std::vector<T> cost{};
+	std::string color{};
+	int C{}, price{};
+
+	std::cin >> C;							// Read the number of different paints
+
+	while (C--) {							// For each paint, store the cost
+		std::cin >> color >> price;
+		cost.emplace_back(price);
+	}
+
+	std::sort(begin(cost), end(cost));		// Order by least expensive
+	return cost;
+}
+
+// Read input for a single test case (a painting)
 template <typename T>
 auto read() {
-	size_t N;
+	size_t N;												// The number of "cells" in the painting
 	std::cin >> N;
 
-	std::vector<std::pair<T, std::set<T>>> ret{};
+	std::vector<std::pair<T, std::set<T>>> graph{};
 
 	while (N--) {
-		T c, cc;
+		T cell, neighbor;
 		std::string input;
-		std::set<T> tmp{};
+		std::set<T> adj{};
 
-		std::getline((std::cin >> c), input);
+		std::getline((std::cin >> cell), input);			// Read in the cell's name before getting the list of neighbors
 
 		std::stringstream ss{ input };
-		while (ss >> cc) tmp.emplace(cc);
+		while (ss >> neighbor) adj.emplace(neighbor);		// Add each neighbor to the adjacency list
 
-		tmp.emplace(c);
-		ret.emplace_back(std::make_pair(c, tmp));
+		adj.emplace(cell);									// Add the cell to it's adjacency list (to stop loops in color, sorry)
+		graph.emplace_back(std::make_pair(cell, adj));		// Add the cell and it's adjacency list to the graph
 	}
 
 	return ret;
 }
 
-template <typename T>
-auto readExpenses() {
-	std::vector<T> cost{};
-	size_t C{};
-
-	std::cin >> C;
-
-	while (C--) {
-		std::string color{};
-		int price{};
-
-		std::cin >> color >> price;
-		cost.emplace_back(price);
-	}
-
-	std::sort(begin(cost), end(cost));
-	return cost;
-}
-
+// Perform graph coloring algorithm
 template <typename C, typename T>
-auto color(std::vector<std::pair<T, std::set<T>>>&& g) {							// Unfortunate type dependency between color and read
+auto color(std::vector<std::pair<T, std::set<T>>>&& g) {							// Unfortunate type dependency between color and read (in order to carry over T)
 	using namespace std;
 
 	// Sort the graph in order of vertex degree
@@ -61,7 +62,7 @@ auto color(std::vector<std::pair<T, std::set<T>>>&& g) {							// Unfortunate ty
 	transform(begin(g), end(g), inserter(vertices, begin(vertices)), [](auto& p) { return p.first; });
 
 	// Initialize algorithm variables
-	map<T, C> color{};
+	unordered_map<T, C> color{};
 	int curr_color{};
 	auto x = begin(g);
 
@@ -85,17 +86,18 @@ auto color(std::vector<std::pair<T, std::set<T>>>&& g) {							// Unfortunate ty
 			// Find a neighbor that won't violate Graph Coloring
 			y = find_if(y, end(non_neighbors),
 				[&color, &g, curr_color](auto& p1) {
-				if (color[p1]) return false;
+					if (color[p1]) return false;
 
-				auto neighbors = find_if(begin(g), end(g), [&p1](auto& p) { return p.first == p1; });
-				for (auto n : neighbors->second)
-					if (color[n] == curr_color)
-						return false;
+					// Check that neighbors of 'p1' aren't already colored with 'curr_color'
+					auto neighbors = find_if(begin(g), end(g), [&p1](auto& p) { return p.first == p1; });
+					for (auto n : neighbors->second)
+						if (color[n] == curr_color)
+							return false;
 
-				return true;
-			});
+					return true;
+				});
 
-			if (y == end(non_neighbors)) break;
+			if (y == end(non_neighbors)) break;			// Exit the loop
 			color[*y] = curr_color;
 		}
 
@@ -105,6 +107,7 @@ auto color(std::vector<std::pair<T, std::set<T>>>&& g) {							// Unfortunate ty
 	return color;
 }
 
+// Determine the cost of the painting and output statement
 template <class Graph, class Vec>
 int write(std::string& name, int paid, const Vec& v, Graph&& color) {
 	std::vector<int> num(v.size());
@@ -120,7 +123,7 @@ int write(std::string& name, int paid, const Vec& v, Graph&& color) {
 	int cost{}, i{};
 	do {
 		cost += num[i] * v[i];
-	} while (num[++i]);
+	} while (num[++i]);					// Stop the loop when all used colors have been seen
 
 	std::cout << name << ": " << (paid > cost ? "profit" : paid < cost ? "loss" : "even") << "\n";
 	return paid - cost;
@@ -134,18 +137,21 @@ int main(int argc, const char* argv[]) {
 	int N{};
 	auto cost = readExpenses<int>();
 
+	// While there are test cases remaining, read the number of paintings in the test case
 	while (std::cin >> N) {
 		std::string name{};
 		int profit{}, price{};
-
+		
+		// Run the algorithm for each painting in the test case
 		while (N--) {
 			std::cin >> name >> price;
 			profit += write(name, price, cost, color<int>(read<d_type>()));
 		}
-		
+
+		// Output ending statement for the test case
 		std::cout << "Profit: " << (profit >= 0 ? "+" : "") << profit << "\n";
 	}
 	
 	//std::cout << "Execution Time: " << std::chrono::duration<double>(std::chrono::steady_clock::now() - start).count() << "\n";
-	//_sleep(10000);
+	//_sleep(100000);
 }
